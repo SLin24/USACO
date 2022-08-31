@@ -31,26 +31,24 @@ int main() {
             }
         }
     }
-    queue<pair<int, int>> q2;
     int dist2[n];
     memset(dist2, -1, sizeof(dist2));
     int ans = 0;
     for (int i = 0; i < n; i++) {
         if (adj[i].size() == 1) {
-            q2.push(make_pair(i, -1));
+            q.push(i);
             dist2[i] = 0;
             ans++;
         }
     }
 
-    while (!q2.empty()) {
-        auto x = q2.front();
-        q2.pop();
-        for (int n: adj[x.first]) {
-            if (n == x.second) continue;
+    while (!q.empty()) {
+        auto x = q.front();
+        q.pop();
+        for (int n: adj[x]) {
             if (dist2[n] == -1) {
-                q2.push(make_pair(n, x.first));
-                dist2[n] = dist2[x.first] + 1;
+                q.push(n);
+                dist2[n] = dist2[x] + 1;
             }
         }
     }
